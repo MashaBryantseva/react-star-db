@@ -1,12 +1,12 @@
-.random-planet-card {
+.random-planet {
     margin-bottom: 20px;
     border: 1px solid #444;
 }
 
-.planet-info-item {
+.random-planet .planet-info-item {
     padding: 10px 0;
 }
 
-.planet-info-item:last-child {
+.random-planet .planet-info-item:last-child {
     padding-bottom: 0;
 }

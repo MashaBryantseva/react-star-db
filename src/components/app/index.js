@@ -2,7 +2,7 @@ import React from 'react';
 
 // Components
 import Header from '../header';
-import RandomPlanet from '../random-planet';
+import RandomPlanetContainer from '../random-planet-container';
 import ItemList from '../item-list';
 
 import './style.css';
@@ -10,12 +10,9 @@ import './style.css';
 const App = () => (
   <div className="app-container">
     <Header />
-    <RandomPlanet />
+    <RandomPlanetContainer />
 
     <div className="row">
-      <div className="col">
-        <ItemList />
-      </div>
       <div className="col">
         <ItemList />
       </div>
