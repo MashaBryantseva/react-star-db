@@ -1,1 +1,1 @@
-# react-star-db
+# React Star DB
