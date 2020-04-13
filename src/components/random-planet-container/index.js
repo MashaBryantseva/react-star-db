@@ -11,7 +11,7 @@ export default class RandomPlanetContainer extends Component {
   state = {
     planet: {},
     isLoading: true,
-    false: false,
+    isError: false,
   };
 
   componentDidMount() {
@@ -21,10 +21,10 @@ export default class RandomPlanetContainer extends Component {
   }
 
   componentWillUnmount() {
-    console.log('will unmount');
+    clearInterval(this.interval);
   }
 
-  onPlanetLoaded = (planet) => {
+  onLoaded = (planet) => {
     this.setState({
       planet,
       isLoading: false,
@@ -46,7 +46,7 @@ export default class RandomPlanetContainer extends Component {
     const id = Math.floor(Math.random() * 9) + 2; // there is no planet with id = 1
 
     this.swapiService.getPlanet(id)
-      .then(this.onPlanetLoaded)
+      .then(this.onLoaded)
       .catch(this.onError);
   };
 

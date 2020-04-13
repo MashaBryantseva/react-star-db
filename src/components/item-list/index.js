@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import SwapiService from '../../services/swapi-service';
-import Spinner from "../spinner";
-import ErrorIndicator from "../error-indicator";
+import Spinner from '../spinner';
+import ErrorIndicator from '../error-indicator';
 
 import './style.css';
 

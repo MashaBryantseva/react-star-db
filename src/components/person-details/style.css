@@ -1,0 +1,7 @@
+.person-details .person-details-item {
+    padding: 10px 0;
+}
+
+.person-details .person-details-item:last-child {
+    padding-bottom: 0;
+}
