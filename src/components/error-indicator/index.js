@@ -1,10 +1,10 @@
 import React from 'react';
 
-import './style.css';
+import CardWrapper from '../card-wrapper';
 
 const ErrorIndicator = () => (
-  <div className="error-indicator card">
-    <div className="card-body text-warning d-flex flex-column text-center">
+  <CardWrapper>
+    <div className="text-warning d-flex flex-column text-center">
       <span className="font-weight-bold">BOOM!</span>
       <span>
         Something has gone terribly wrong.
@@ -13,7 +13,7 @@ const ErrorIndicator = () => (
         (but we already sent droids to fix it)
       </span>
     </div>
-  </div>
+  </CardWrapper>
 );
 
 export default ErrorIndicator;
