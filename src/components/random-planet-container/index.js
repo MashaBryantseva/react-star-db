@@ -14,10 +14,14 @@ export default class RandomPlanetContainer extends Component {
     false: false,
   };
 
-  constructor() {
-    super();
-
+  componentDidMount() {
     this.updatePlanet();
+
+    this.interval = setInterval(this.updatePlanet, 10000);
+  }
+
+  componentWillUnmount() {
+    console.log('will unmount');
   }
 
   onPlanetLoaded = (planet) => {
@@ -38,13 +42,13 @@ export default class RandomPlanetContainer extends Component {
     });
   };
 
-  updatePlanet() {
-    const id = Math.floor(Math.random() * 8) + 2;
+  updatePlanet = () => {
+    const id = Math.floor(Math.random() * 9) + 2; // there is no planet with id = 1
 
     this.swapiService.getPlanet(id)
       .then(this.onPlanetLoaded)
       .catch(this.onError);
-  }
+  };
 
   render() {
     const { planet, isLoading, isError } = this.state;
@@ -52,7 +56,7 @@ export default class RandomPlanetContainer extends Component {
 
     if (isLoading) {
       return <Spinner />;
-    } else if (isError || !name && !diameter && !rotationPeriod && !population) {
+    } else if (isError || (!name && !diameter && !rotationPeriod && !population)) {
       return <ErrorIndicator />;
     }
 
