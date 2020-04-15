@@ -2,16 +2,9 @@ import React, { Component } from 'react';
 
 import SwapiService from '../../services/swapi-service';
 
-import ItemList from '../item-list';
-import ItemDetails from '../item-details';
 import Row from '../row';
 import ErrorBoundry from '../error-boundry';
-
-const Record = ({ item, label, field, classNames }) => (
-  <li className={classNames}>
-    { label }: { item[field] }
-  </li>
-);
+import { PersonList, PersonDetails } from '../sw-components';
 
 export default class PeoplePage extends Component {
   swapiService = new SwapiService();
@@ -27,25 +20,15 @@ export default class PeoplePage extends Component {
   renderItem = ({ name, birthYear }) => `${name} (${birthYear})`;
 
   render() {
-    const { selectedListItem, hasError } = this.state;
+    const { selectedListItem } = this.state;
 
     const itemList = (
-      <ItemList
+      <PersonList
         onListItemSelected={this.onListItemSelect}
-        getData={this.swapiService.getAllPeople}
         renderItem={this.renderItem}
       />
     );
-    const itemDetails = (
-      <ItemDetails
-        id={selectedListItem}
-        getData={this.swapiService.getPerson}
-      >
-        <Record label="Birth year" field="birthYear" />
-        <Record label="Height" field="height" />
-        <Record label="Weight" field="mass" />
-      </ItemDetails>
-    );
+    const itemDetails = <PersonDetails id={selectedListItem} />;
 
     return (
       <ErrorBoundry>
