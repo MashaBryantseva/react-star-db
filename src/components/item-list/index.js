@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 
-import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
 import './style.css';
 
 export default class ItemList extends Component {
-  swapiService = new SwapiService();
-
   state = {
-    peopleList: [],
+    itemList: [],
     isLoading: true,
     isError: false,
   };
 
-  onLoaded = (peopleList) => {
+  onLoaded = (itemList) => {
     this.setState({
-      peopleList: peopleList || [],
+      itemList: itemList || [],
       isLoading: false,
       isError: false,
     });
@@ -27,21 +24,21 @@ export default class ItemList extends Component {
     console.log('Could not fetch', error);
 
     this.setState({
-      peopleList: [],
+      itemList: [],
       isLoading: false,
       isError: true,
     });
   };
 
   componentDidMount() {
-    this.swapiService.getAllPeople()
-      .then(this.onLoaded)
-      .catch(this.onError);
+    const { getData } = this.props;
+
+    getData().then(this.onLoaded).catch(this.onError);
   }
 
   render() {
-    const { peopleList, isLoading, isError } = this.state;
-    const { onListItemSelected } = this.props;
+    const { itemList, isLoading, isError } = this.state;
+    const { onListItemSelected, renderItem } = this.props;
 
     if (isLoading) {
       return <Spinner />;
@@ -52,13 +49,13 @@ export default class ItemList extends Component {
     return (
       <ul className="item-list list-group">
         {
-          peopleList.map(({ name, id }) => (
+          itemList.map(({ id, ...item }) => (
             <li
               key={id}
               className="item-list-item list-group-item"
               onClick={() => onListItemSelected(id)}
             >
-              { name }
+              { renderItem(item) }
             </li>
           ))
         }

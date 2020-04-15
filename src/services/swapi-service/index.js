@@ -1,11 +1,11 @@
 export default class SwapiService {
   _swapiApi = 'https://apxuapi.herokuapp.com/api';
 
-  async getAllPeople() {
+  getAllPeople = async () => {
     const res = await this._getResource(`people`);
 
     return res.results.map(this._transformPerson);
-  }
+  };
 
   getPerson = async (id) => {
     const res = await this._getResource(`people/${id}`);
